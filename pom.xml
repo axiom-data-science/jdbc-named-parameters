@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.axiomalaska</groupId>
+  <artifactId>jdbc-named-parameters</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>JDBC Named Parameters</name>
+  <description>Library providing named parameter capability for JDBC</description>
+  <url>https://github.com/axiomalaska/jdbc-named-parameters</url>
+
+  <licenses>
+    <license>
+      <name>Unlicense (public domain)</name>
+      <url>http://unlicense.org/UNLICENSE</url>
+      <distribution>repo</distribution>
+    </license>  
+  </licenses>
+
+  <scm>
+    <url>https://github.com/axiomalaska/jdbc-named-parameters</url>
+    <connection>scm:git:git://github.com/axiomalaska/jdbc-named-parameters.git</connection>
+    <developerConnection>scm:git:git@github.com:axiomalaska/jdbc-named-parameters.git</developerConnection>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/axiomalaska/jdbc-named-parameters/issues</url>
+  </issueManagement>
+
+  <developers>
+    <developer>
+      <id>shane-axiom</id>
+      <name>Shane StClair</name>
+      <email>shane@axiomalaska.com</email>
+      <organization>Axiom</organization>
+      <organizationUrl>http://www.axiomalaska.com</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>US/Pacific</timezone>
+    </developer>
+  </developers>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>16.0.1</version>
+      <scope>test</scope>
+    </dependency>      
+  </dependencies>
+
+  <distributionManagement>
+    <repository>
+      <id>axiom_public_releases</id>
+      <name>Axiom Releases</name>
+      <uniqueVersion>false</uniqueVersion>
+      <url>
+        http://nexus.axiomalaska.com/nexus/content/repositories/public-releases
+      </url>
+    </repository>
+    <snapshotRepository>
+      <id>axiom_public_snapshots</id>
+      <name>Axiom Snapshots</name>
+      <uniqueVersion>false</uniqueVersion>
+      <url>
+        http://nexus.axiomalaska.com/nexus/content/repositories/public-snapshots
+      </url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
