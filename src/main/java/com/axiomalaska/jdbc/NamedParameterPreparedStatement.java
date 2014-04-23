@@ -144,7 +144,8 @@ public class NamedParameterPreparedStatement extends DelegatingPreparedStatement
         Collection<Integer> indexes = new ArrayList<Integer>();
         for (int i = 0; i < orderedParameters.size(); i++) {
             if (orderedParameters.get(i).equals(parameter)) {
-                indexes.add(i);
+                //add i + 1, since all indexes ever are 0 based EXCEPT JDBC PARAMS WHYYYYY
+                indexes.add(i + 1);
             }
         }
         if (indexes.isEmpty()) {
