@@ -17,8 +17,8 @@
 
   <scm>
     <url>https://github.com/axiomalaska/jdbc-named-parameters</url>
-    <connection>scm:git:git://github.com/axiomalaska/jdbc-named-parameters.git</connection>
-    <developerConnection>scm:git:git@github.com:axiomalaska/jdbc-named-parameters.git</developerConnection>
+    <connection>scm:git:https://github.com/axiomalaska/jdbc-named-parameters.git</connection>
+    <developerConnection>scm:git:https://github.com/axiomalaska/jdbc-named-parameters.git</developerConnection>
   </scm>
 
   <issueManagement>
