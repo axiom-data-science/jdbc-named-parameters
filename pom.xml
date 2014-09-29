@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.axiomalaska</groupId>
   <artifactId>jdbc-named-parameters</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <name>JDBC Named Parameters</name>
   <description>Library providing named parameter capability for JDBC</description>
   <url>https://github.com/axiomalaska/jdbc-named-parameters</url>
@@ -23,7 +23,7 @@
     <url>https://github.com/axiomalaska/jdbc-named-parameters</url>
     <connection>scm:git:https://github.com/axiomalaska/jdbc-named-parameters.git</connection>
     <developerConnection>scm:git:https://github.com/axiomalaska/jdbc-named-parameters.git</developerConnection>
-    <tag>jdbc-named-parameters-1.0.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
