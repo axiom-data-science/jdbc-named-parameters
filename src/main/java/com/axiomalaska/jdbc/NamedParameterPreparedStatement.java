@@ -1,5 +1,7 @@
 package com.axiomalaska.jdbc;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -53,7 +55,9 @@ public class NamedParameterPreparedStatement extends DelegatingPreparedStatement
         StringBuffer parsedQuery = new StringBuffer(length);
         boolean inSingleQuote = false;
         boolean inDoubleQuote = false;
-        
+        boolean inSingleLineComment = false;
+        boolean inMultiLineComment = false;
+
         for (int i = 0; i < length; i++) {
             char c = query.charAt(i);
             if (inSingleQuote) {
@@ -64,11 +68,23 @@ public class NamedParameterPreparedStatement extends DelegatingPreparedStatement
                 if (c == '"') {
                     inDoubleQuote = false;
                 }
+            } else if (inMultiLineComment) {
+                if (c == '*' && query.charAt(i + 1) == '/') {
+                    inMultiLineComment = false;
+                }
+            } else if (inSingleLineComment) {
+                if (c == '\n') {
+                    inSingleLineComment = false;
+                }
             } else {
                 if (c == '\'') {
                     inSingleQuote = true;
                 } else if (c == '"') {
                     inDoubleQuote = true;
+                } else if (c == '/' && query.charAt(i + 1) == '*') {
+                    inMultiLineComment = true;
+                } else if (c == '-' && query.charAt(i + 1) == '-') {
+                    inSingleLineComment = true;
                 } else if (c == ':' && i + 1 < length && Character.isJavaIdentifierStart(query.charAt(i + 1))) {
                     int j = i + 2;
                     while (j < length && Character.isJavaIdentifierPart(query.charAt(j))) {
@@ -274,5 +290,33 @@ public class NamedParameterPreparedStatement extends DelegatingPreparedStatement
         for (Integer i : getParameterIndexes(parameter)) {
             getDelegate().setObject(i, x);
         }
+    }
+    
+    public static void main(String args[]) throws IOException {
+        if (args.length == 0) {
+            throw new RuntimeException("Supply a path to a query file!");
+        }
+
+        File queryFile = new File(args[0]);
+        if (!queryFile.exists()) {
+            throw new RuntimeException("Query file doesn't exist: '" + queryFile.getAbsolutePath() + "'");
+        }
+
+        String query = FileUtil.readFile(queryFile);
+        ParseResult parseResult = parse(query);
+        
+        System.out.println("Original SQL:");
+        System.out.println(query);
+        System.out.println();
+        
+        System.out.println("Parsed SQL:");
+        System.out.println(parseResult.getSql());
+        System.out.println();
+
+        System.out.println("Parsed parameters:");
+        int i = 1;
+        for (String param : parseResult.getOrderedParameters()) {
+            System.out.println(i++ + ": " + param);
+        }        
     }
 }

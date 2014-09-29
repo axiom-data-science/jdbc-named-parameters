@@ -7,6 +7,10 @@
   <description>Library providing named parameter capability for JDBC</description>
   <url>https://github.com/axiomalaska/jdbc-named-parameters</url>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <licenses>
     <license>
       <name>Unlicense (public domain)</name>
@@ -53,7 +57,7 @@
       <artifactId>guava</artifactId>
       <version>16.0.1</version>
       <scope>test</scope>
-    </dependency>      
+    </dependency>
   </dependencies>
 
   <distributionManagement>
@@ -74,4 +78,22 @@
       </url>
     </snapshotRepository>
   </distributionManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <!-- NOTE: this won't work if dependencies are ever added. Move to shaded build if that's the case -->
+              <mainClass>com.axiomalaska.jdbc.NamedParameterPreparedStatement</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>  
+  </build>
 </project>
