@@ -57,6 +57,7 @@ public class NamedParameterPreparedStatement extends DelegatingPreparedStatement
         boolean inDoubleQuote = false;
         boolean inSingleLineComment = false;
         boolean inMultiLineComment = false;
+        boolean inDoubleСolon = false;
 
         for (int i = 0; i < length; i++) {
             char c = query.charAt(i);
@@ -72,6 +73,10 @@ public class NamedParameterPreparedStatement extends DelegatingPreparedStatement
                 if (c == '*' && query.charAt(i + 1) == '/') {
                     inMultiLineComment = false;
                 }
+            } else if (inDoubleСolon) {
+            	if (!Character.isJavaIdentifierPart(c)) {
+            		inDoubleСolon = false;
+                }
             } else if (inSingleLineComment) {
                 if (c == '\n') {
                     inSingleLineComment = false;
@@ -85,6 +90,8 @@ public class NamedParameterPreparedStatement extends DelegatingPreparedStatement
                     inMultiLineComment = true;
                 } else if (c == '-' && query.charAt(i + 1) == '-') {
                     inSingleLineComment = true;
+                } else if (c == ':' && query.charAt(i + 1) == ':') {
+                	inDoubleСolon = true;    
                 } else if (c == ':' && i + 1 < length && Character.isJavaIdentifierStart(query.charAt(i + 1))) {
                     int j = i + 2;
                     while (j < length && Character.isJavaIdentifierPart(query.charAt(j))) {

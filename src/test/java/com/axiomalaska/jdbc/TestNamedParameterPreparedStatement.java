@@ -35,4 +35,14 @@ public class TestNamedParameterPreparedStatement {
         assertEquals(expectedParsedQuery, parseResult.getSql());
         assertThat(expectedParameterList, is(parseResult.getOrderedParameters()));
     }
+
+    @Test
+    public void testDoubleColon() throws IOException{
+        String testQuery = "SELECT '{1,2,3,4,5}'::int[] WHERE some_field = :some_field_value";
+        String expectedParsedQuery = "SELECT '{1,2,3,4,5}'::int[] WHERE some_field = ?";
+        List<String> expectedParameterList = Lists.newArrayList("some_field_value");
+        ParseResult parseResult = NamedParameterPreparedStatement.parse(testQuery);
+        assertEquals(expectedParsedQuery, parseResult.getSql());
+        assertThat(expectedParameterList, is(parseResult.getOrderedParameters()));
+    }
 }
