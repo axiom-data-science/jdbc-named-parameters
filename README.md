@@ -7,6 +7,24 @@ Credit to Adam Crume for his implementation of the SQL query parser:
 
 http://www.javaworld.com/article/2077706/core-java/named-parameters-for-preparedstatement.html
 
+## Usage
+
+Add as a dependency:
+
+```
+<dependency>
+  <groupId>com.axiomalaska</groupId>
+  <artifactId>jdbc-named-parameters</artifactId>
+  <version>1.1</version>
+</dependency>
+```
+
+Then use in place of PreparedStatement, e.g.
+
+```
+PreparedStatement stat = NamedParameterPreparedStatement.createNamedParameterPreparedStatement(connection, "SELECT id FROM some_table WHERE name = :name");
+```
+
 ## Query test parsing
 
 Usually this library should be used internally by applications to parse queries
