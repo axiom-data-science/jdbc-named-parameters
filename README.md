@@ -22,7 +22,8 @@ Add as a dependency:
 Then use in place of PreparedStatement, e.g.
 
 ```
-PreparedStatement stat = NamedParameterPreparedStatement.createNamedParameterPreparedStatement(connection, "SELECT id FROM some_table WHERE name = :name");
+PreparedStatement stat = NamedParameterPreparedStatement.createNamedParameterPreparedStatement(
+    connection, "SELECT id FROM some_table WHERE name = :name");
 ```
 
 ## Query test parsing
